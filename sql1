@@ -83,4 +83,89 @@ select * from Software where Scost*Sold > 20000
 --13. Display the details of package for which development cost has been recovered.
 select * from Software where Scost*Sold >= Ccost
    
---
+--14. What is the price of the costliest softwere developed in basic.
+select Max(Ccost) as 'Costliest Software' from Software where Dev_In = 'c'
+
+--15.How many package were developed in dbase.
+select Count(Dev_In) from Software where Dev_In = 'dbase'
+
+--16.How many programmers studied at pragathi.
+select Name from Studies where Splace = 'pragathi'
+
+--17.How many programmers paid 5000 to 10000 to their course 
+select Name from Studies where Ccost between 5000 and 10000
+
+--18.What is the average course fee.
+select avg(Ccost) from Studies
+
+--19.Display the details of programmers knowing c.
+select Name,DOB,DOJ,Sex,Salary from Programmer where Prof1 = 'c' or Prof2 ='c' 
+
+--20.How many programmers knowing either cobol or pascal.
+select Name from Programmer where Prof1 ='cobol' or Prof2='pascal' and Prof1='pascal' or Prof2='cobol'
+
+--21.How many programmers don’t know cobal & pascal .
+
+
+--22.How old is oldest male programmer.
+select Max(DATEDIFF(yyyy,DOB,GETDATE())) as 'Oldest Programmer' from Programmer where Sex='M'
+
+--23.What is the average age of female programmers.
+select AVG(DATEDIFF(yyyy,DOB,GETDATE())) from Programmer where Sex='F'
+
+--24.Calculate the experience in years for each programmers and display along with the names in descending order.
+select Name,YEAR(GETDATE()) - YEAR(DOJ) as 'Experience'from Programmer order by Name Desc
+
+--25.Who are the programmer who celebrate their birthday’s during the current month .
+select Name from Programmer where MONTH(GETDATE()) = MONTH(DOB)
+
+--26.How many female programmers are there.
+select Count(Name) from Programmer where Sex='F'
+
+--27.What are the languages known by male programmers.
+select Name,Prof1,Prof2 from Programmer where Sex='M'
+
+--28.What is the average salary.
+select AVG(Salary) from Programmer
+
+--29.. How many people draw 2000 to 4000.
+select Count(Salary) from Programmer where Salary between 2000 and 4000
+
+--30.Display the detials of those who don’t know cupper, cobol, pascal.
+select Name from Programmer
+
+--31.How many female programmers knowing c are above 24 years of age .
+
+32.Who are the programmers who will be celebrating their birthday within a week.
+
+
+--33.Display the details of those with less than one year of experience.
+select Name from Programmer where YEAR(GETDATE()) - year(DOJ) < 1 
+
+--34.Display the details of those who will be completing 2 years of service this year.
+select * from Programmer where YEAR(GETDATE()) - year(DOJ) = 2
+
+--35.Calculate the amount to be recovered for those packages whose development cost has not yet been recovered.
+select Title,( Ccost - (Scost*Sold) ) AS 'Amount To Be Recovered' from Software where Scost * Sold !> Ccost
+
+--36 list the packages which has been sold so FAR
+  select Title from Software where Sold > 0   
+
+--37 FIND OUT THE COST OF SOFTWARES DEVELOPED BY MARY
+select Ccost from Software where Name = 'Mary'
+
+--39 HOW MANY DIFFERENT COURSES ARE MENTIONED IN STUDIES TABLE
+ select (Count(Distinct Course)) from Studies    
+
+--40 DISPLAY THE NAMES OF THE PROGRAMMERS WHOSE NAME CONTAINS  2 OCCURANCES OF THE LETTER 'A'
+select Name from Programmer where Name Contains 'a'
+
+--41 DISPLAY THE NAMES OF THE PROGRAMMERS WHOSE NAMES ARE UPTO 5 CHARACTERS
+select Name from Programmer where Len(Name) > 5
+
+--42 DISPLAY THE NAME.DOB,DOJ OF THOSE WHOSE MONTH OF BIRTH AND THE  MONTH OF JOINING ARE SAME.
+select Name,DOb,DOJ from Programmer where MONTH(DOB) = MONTH(DOJ)
+
+--43 DISPLAY NAME, DOB OF THE PROGRAMMERS BORN ON THE LAST DAY OF THE MONTH. 
+select Name,DOB from Programmer where
+
