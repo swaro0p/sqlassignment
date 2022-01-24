@@ -1,0 +1,86 @@
+create table Programmer
+(
+Name varchar(25) not null,
+DOB datetime not null,
+DOJ datetime,
+Sex varchar(1),
+Prof1 varchar(10), 
+Prof2 varchar(10),
+Salary Int 
+)
+
+create table Software
+(
+Name varchar(20) not null,
+Title char(20) not null,
+Dev_In varchar(10) not null,
+Scost bigint,
+Ccost bigint,
+Sold bigint
+)
+
+create table Studies
+(
+Name varchar(25) not null,
+Splace varchar(25) not null,
+Course varchar(10) not null,
+Ccost bigint
+)
+
+select * from Programmer
+
+insert into Programmer values('Anand','21-APR-66','21-APR-92','M','Pascal','Basic',3200)
+
+insert into Programmer values ('VIJAYA','14-DEC-66','02-MAY-92','F','FOXPRO','C',3600)
+
+select * from Software
+
+insert into Software values('VIJAYA','ISK EDITOR','C',900,700,6)
+
+select * from Studies
+
+insert into Studies values('REMITHA','BDPS','DCS',6000)
+
+select  ROUND(20*RAND(),0)
+
+
+--1. Find out the selling cost average for package developed in Pascal.
+select avg(Scost) as 'Cost Average' from Software where Dev_In='PASCAL';
+
+--2. Display the names and age of all programmers
+select getdate(),sysdatetime(),GETUTCDATE()
+select YEAR(GETDATE())
+select DATEADD(m,5,'1-24-2022')
+
+select Name, DATEDIFF(YYYY,DOB,GETDATE()) as 'Age' from Programmer
+
+--3.Display the names of those who have done the dap course.
+select Name from Studies where Course='DAP'
+
+--4.What the highest number of copies sold by a package.
+select MAX(Sold) from Software
+
+--5.Display the names and date of birth of all the programmers born in January.
+select Name,DOB from Programmer where MONTH(DOB) = 1
+
+--6.Display the lowest course fee.
+select MIN(Ccost) from Studies
+
+--7.How many programmers have done the pgdca course.
+select Count(Name) from Studies where Course = 'PGDCA'
+
+--9.Display the details of the softwere deveolped by ramesh .
+select * from Software where Name = 'Ramesh'
+
+--10.How many programmers studied at sabhari.
+select Name from Studies where Splace='sabhari'
+
+--11.Display the details of packages whose sales crossed the 20000 marks.
+select * from Software where Scost*Sold > 20000 
+
+--12.Find Out the number of copies which should be sold in order to recover the development cost of each package.
+
+--13. Display the details of package for which development cost has been recovered.
+select * from Software where Scost*Sold >= Ccost
+   
+--
