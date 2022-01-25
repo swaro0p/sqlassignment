@@ -1,0 +1,85 @@
+use sqlassignment1
+select * from Software
+
+select * from Programmer
+
+select * from Studies
+
+--1 DISPLAY THE NUMBER OF PACKAGES DEVELOPED IN EACH LANGUAGE.
+select Dev_In,Count(Title) as NoOfProjects from Software group by Dev_In
+
+--2 DISPLAY THE NUMBER OF PACKAGES DEVELOPED BY EACH PERSON
+select Name,Count(Title) as 'Software Developed' from Software group by Name
+
+--3 DISPLAY THE NUMBER OF PEOPLE BORN IN EACH YEAR
+select Year(DOB),Count(YEAR(DOB)) from Programmer group by YEAR(DOB)
+
+--4 DISPLAY THE NUMBER OF PEOPLE JOINED IN EACH YEAR.
+select YEAR(DOJ),Count(YEAR(DOJ)) from Programmer group by Year(DOJ)
+
+--5 DISPLAY THE NUMBER OF PEOPLE BORN IN EACH MONTH.
+select MONTH(dob) as 'Month',Count(MONTH(Dob)) from Programmer group by MONTH(DOB)
+
+--6 DISPLAY THE NUMBER OF PEOPLE JOINED IN EACH MONTH.
+  select MONTH(doj) as 'Month',COUNT(MONTH(doj)) from Programmer group by MONTH(doj)
+
+--7 DISPLAY THE LANGUAGE WISE COUNT OF PRO1
+select prof1,Count(Prof1) from Programmer group by Prof1
+
+--8 DISPLAY THE LANGUAGE WISE COUNT OF PROF2
+select prof2,COUNT(prof2) from Programmer group by Prof2
+
+--9 DISPLAY THE NUMBER  OF PEOPLE WHO STUDIED IN EACH INSTITUTE.
+select Splace, Count(Name) from Studies group by Splace
+
+--10 DISPLAY THE NUMBER OF PEOPLE WHO STUDIED IN EACH COURSE.
+select Course, Count(Name) from Studies group by Course
+
+--11 DISPLAY THE TOTAL DEVELOPMENT COST OF THE PACKAGES DEVELOPED IN  EACH  LANGUAGE.
+select Dev_in, SUM(Ccost) from Software group by Dev_in
+   
+--12 DISPLAY THE SELLING COST OF THE PACKAGE DEVELOPED BY EACH PROGRAMMER.
+    select Name,Sum(Scost) from Software group by Name order by Sum(Scost) desc
+
+--13 DISPLAY THE SALES COST OF THE PACKAGES DEVELOPED BY EACH PROGRAMMER LANGUAGE  WISE.
+  select Dev_in,Name, SUM(Scost) as 'Sales Cost' from Software group by Dev_in,Name order by Dev_In
+    
+    
+/*14 DISPLAY EACH PROGRAMMERS NAME, COSTIEST PACKAGE AND CHEAPEST PACKAGE 
+   DEVELOPED BY HIM/HER.
+*/
+  select Name,Max(Ccost) as 'COSTIEST',Min(ccost) as 'CHEAPEST' from Software group by Name
+
+--15 DISPLAY THE NUMBER OF PACKAGES DEVELOPED BY EACH PROGRAMMER.
+     select Name,Count(Title) from Software group by Name
+--16 DISPLAY EACH LANGUAGE NAME WITH NUMBER OF COURSES, AVERAGE COST PER COURSE.
+
+--17 DISPLAY EACH INSTITUTE NAME WITH NUMBER OF COURSES, AVERAGE COST PER COURSE.
+select Splace,Count(Course) as 'No of cources',AVG(ccost) as 'avg cost' from Studies group by Splace
+  
+--18 DISPLAY EACH INSTITUTE NAME WITH NUMBER OF STUDENTS
+select Splace,Count(Distinct Name) from Studies group by Splace
+
+--19 DISPLAY NUMBER OF MALE AND FEMALE PROGRAMMER
+ select Sex,Count(Sex) from Programmer group by Sex 
+
+--20 DISPLAY THE PROGRAMMERS NAME AND THE PACKAGES
+select Name,salary from Programmer
+ 
+--21 DISPLAY THE NUMBER OF PACKAGES IN EACH LANGUAGE FOR WHICH DEVELOPMENT COST IS LESS THAN 1000
+select Count(Title) as 'no of package',Dev_In from  Software where Ccost < 1000 Group by Dev_In
+   
+--22 DISPLAY THE AVERAGE DIFFERENCE BETWEEN SCOST AND DCOST FOR EACH LANGUAGE.
+select Avg(ccost - scost) as 'AVERAGE DIFFERENCE BETWEEN SCOST AND DCOST',Dev_in from software group by Dev_in
+   
+/*23 DISPLAY THE TOTAL SCOST, SCOST AND THE AMOUNT TO BE RECOVERED FOR EACH  
+   PROGRAMMER FOR WHOSE DCOST HAS NOT YET BEEN RECOVERED.
+   */
+   select Title,Scost*sold as 'Total Scost',Scost,Ccost-(Scost*sold) as'AMOUNT TO BE RECOVERED' from Software where Scost*sold < Ccost
+
+--24 DISPLAY HIGHEST, LOWEST AND AVERAGE SALARIES FOR THOSE EARNING MORE THAN 2000
+select MAX(salary) as 'HIGHEST',MIN(salary) as LOWEST,avg(salary) as 'AVERAGE SALARIES'  from Programmer where salary > 2000
+
+select * from programmer where DATEPART(WEEK,DOB) = DATEPART(WEEK,GETDATE())
+
+select Name + ':' + Title as 'Concatinate' from software
