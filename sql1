@@ -161,7 +161,7 @@ select Ccost from Software where Name = 'Mary'
 select Name from Programmer where Name Contains 'a'
 
 --41 DISPLAY THE NAMES OF THE PROGRAMMERS WHOSE NAMES ARE UPTO 5 CHARACTERS
-select Name from Programmer where Len(Name) > 5
+select Name from Programmer where Len(Name) <= 5
 
 --42 DISPLAY THE NAME.DOB,DOJ OF THOSE WHOSE MONTH OF BIRTH AND THE  MONTH OF JOINING ARE SAME.
 select Name,DOb,DOJ from Programmer where MONTH(DOB) = MONTH(DOJ)
