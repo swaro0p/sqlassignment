@@ -1,0 +1,62 @@
+use sqlassignment2
+
+create table test 
+(
+ id int,
+uname varchar(25)
+)
+
+alter table test add constraint uid Unique(uname)
+
+alter table test alter column id int not null
+alter table test add constraint pkid Primary key(id) 
+
+insert into test values(1,'user1')
+insert into test values(2,'user2')
+
+
+create table fktest
+(
+ fkid int foreign key references test(id),
+ fkname varchar(25), 
+)
+insert into fktest values(1,'fkuser1')
+insert into fktest values(2,'fkuser2')
+
+
+insert into fktest values(3,'fkuser3')
+/*
+Msg 547, Level 16, State 0, Line 24
+The INSERT statement conflicted with the FOREIGN KEY constraint "FK__fktest__fkid__1273C1CD". The conflict occurred in database "sqlassignment2", table "dbo.test", column 'id'.
+The statement has been terminated.
+
+*/
+
+select * from fktest
+
+use [sqlassignment2]
+create table emp 
+(
+	eid int,
+	ename varchar(25),
+	salary decimal,
+	hra AS (salary*20/100),
+	da as (salary*30/100),
+	total as (salary+(salary*20/100)+(salary*30/100))	 
+)
+
+insert into emp values(1,'swaroop',22000)
+insert into emp values(2,'aman',22000)
+insert into emp values(3,'shoab',25000)
+insert into emp values(4,'viky',24000)
+insert into emp values(5,'lahu',26000)
+
+select top 2 ename from emp 
+
+drop table emp
+
+--select with into
+
+select * into newemp from emp
+
+select * from newemp
