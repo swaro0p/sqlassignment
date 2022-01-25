@@ -137,7 +137,7 @@ select Name from Programmer
 --31.How many female programmers knowing c are above 24 years of age .
 
 32.Who are the programmers who will be celebrating their birthday within a week.
-
+select * from programmer where DATEPART(WEEK,DOB) = DATEPART(WEEK,GETDATE())
 
 --33.Display the details of those with less than one year of experience.
 select Name from Programmer where YEAR(GETDATE()) - year(DOJ) < 1 
